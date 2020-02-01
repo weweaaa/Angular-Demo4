@@ -1,9 +1,14 @@
 <section class="main">
   <ul class="todo-list">
-    <li>
+    <li
+      *ngFor="let task of tasksData"
+      [ngClass]="task.isDone ? '' : 'completed'"
+    >
       <div class="view">
         <input class="toggle" type="checkbox" />
-        <label *ngFor="let task of tasksData">{{ task.title }}</label>
+        <label (dblclick)="editTask($event)">{{
+          task.title
+        }}</label>
         <button class="destroy"></button>
       </div>
       <input class="edit" />

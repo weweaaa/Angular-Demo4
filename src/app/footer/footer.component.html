@@ -1,4 +1,7 @@
 <footer class="footer">
-  <span class="todo-count"><strong></strong> left</span>
-  <button class="clear-completed">Clear completed</button>
+  <span class="todo-count">
+    <strong>已完成 {{ isDoneNum }} 項， </strong>
+    <strong>未完成完成 {{ isnotDoneNum }} 項</strong>
+  </span>
+  <button (click)="clearCompleteList()" class="clear-completed">Clear completed</button>
 </footer>

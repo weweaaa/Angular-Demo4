@@ -1,5 +1,5 @@
 <section class="todoapp">
   <app-header (changeList)="addTodo($event)"></app-header>
   <app-list></app-list>
-  <app-footer></app-footer>
+  <app-footer [taskList]="taskList" *ngIf="taskListNum !== 0"></app-footer>
 </section>

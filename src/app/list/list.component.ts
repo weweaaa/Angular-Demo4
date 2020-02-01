@@ -30,4 +30,12 @@ export class ListComponent implements OnInit {
       console.log(errorMsg);
     });
   }
+
+  /**
+   * 編輯代辦清單資料
+   */
+  editTask(event: MouseEvent) {
+    const value = (event.target as HTMLLabelElement).innerText;
+    console.log('user edit', value);
+  }
 }
