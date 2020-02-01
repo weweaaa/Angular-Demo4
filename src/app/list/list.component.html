@@ -1,0 +1,12 @@
+<section class="main">
+  <ul class="todo-list">
+    <li>
+      <div class="view">
+        <input class="toggle" type="checkbox" />
+        <label *ngFor="let task of tasksData">{{ task.title }}</label>
+        <button class="destroy"></button>
+      </div>
+      <input class="edit" />
+    </li>
+  </ul>
+</section>

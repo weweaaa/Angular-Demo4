@@ -36,3 +36,12 @@
 ## Reference 
 * [json-server 文件說明](https://github.com/typicode/json-server)
 * [todoMVC 功能展示](http://todomvc.com/examples/angularjs/#/)
+
+
+---
+## 開發中注意事項
+- 透過 `code snippet` 引入 `EventEmitter` 事件物件時，要注意不要用錯 `import` 來源
+  - `from protractor` 裡面也有 `EventEmitter`
+  - 我們實際要使用的 `import` 來源是 `@angular/core` 來源內的 `EventEmitter`
+- 在使用 `ng g s list` 時，如果不想同時建立目錄
+  - 可加上 `--flat` 參數，如此就只會建立 `list.service.ts` 檔案

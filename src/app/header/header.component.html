@@ -1,0 +1,10 @@
+<header class="header">
+  <h1>todos</h1>
+  <input
+    (keydown.escape)="clearInput($event)"
+    (keydown.enter)="updateInput($event)"
+    class="new-todo"
+    placeholder="What needs to be done?"
+  />
+  <input id="toggle-all" class="toggle-all" type="checkbox" />
+</header>
