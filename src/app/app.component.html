@@ -1,5 +1,10 @@
 <section class="todoapp">
   <app-header (changeList)="addTodo($event)"></app-header>
-  <app-list></app-list>
-  <app-footer [taskList]="taskList" *ngIf="taskListNum !== 0"></app-footer>
+  <app-list (changeTaskStatus)="clickChangeTaskStatus($event)" [taskList]="taskList" [taskStatus]="taskStatus"></app-list>
+  <app-footer
+    (clearComplete)="clearCompleteEvent($event)"
+    (changeTaskStatus)="changeShowTaskStatus($event)"
+    [taskList]="taskList"
+    *ngIf="taskListNum !== 0"
+  ></app-footer>
 </section>

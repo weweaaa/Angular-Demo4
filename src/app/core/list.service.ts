@@ -38,16 +38,27 @@ export class ListService {
   }
 
   /**
+   * 更新一筆 Task todo 資料
+   * @param number id
+   * @param Task task
+   */
+  putTask(id: number, task: Task) {
+    if (id > 0) {
+      return this.http.put<Task>(this.api + '/' + id, task);
+    } else {
+      console.error('deleteTask => id < 0');
+    }
+  }
+
+  /**
    * 刪除指定的 Tasks 資料清單
    * @param number id 要刪除的該筆資料 id
    */
   deleteTask(id: number) {
     if (id > 0) {
-      return this.http.delete<Task>(this.api + id);
+      return this.http.delete<Task>(this.api + '/' + id);
     } else {
       console.error('deleteTask => id < 0');
     }
-
   }
-
 }
