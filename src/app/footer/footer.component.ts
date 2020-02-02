@@ -8,7 +8,14 @@ import { Task } from '../domain/Task';
 })
 export class FooterComponent implements OnInit {
 
-  @Input() taskList: Task[];
+  taskList: Task[];
+
+  @Input('taskList') set setTaskList(taskList: Task[]) {
+    this.taskList = taskList;
+    this.isDoneNum = this.getTaskDoneList(true).length;
+    this.isnotDoneNum = this.getTaskDoneList(false).length;
+  }
+
   @Output() clearComplete = new EventEmitter<number[]>();
 
   isDoneNum = 0;
