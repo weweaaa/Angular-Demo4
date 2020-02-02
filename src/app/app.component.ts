@@ -71,6 +71,23 @@ export class AppComponent implements OnInit {
   }
 
   /**
+   * 使用者手動進行刪除動作
+   * @param delTaskId 要刪除的 Task ID
+   */
+  deleteTaskID(delTaskId: number) {
+    if (delTaskId > 0) {
+      this.listService.deleteTask(delTaskId).subscribe(
+        (response) => {
+          this.getTaskData();
+          console.log('delete success.');
+        },
+        (error) => {
+          console.error('delete faild.');
+        });
+    }
+  }
+
+  /**
    * 更改 Task 的清單狀態顯示
    */
   changeShowTaskStatus(taskStatus: TaskStatus) {

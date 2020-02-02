@@ -56,7 +56,7 @@ export class ListService {
    */
   deleteTask(id: number) {
     if (id > 0) {
-      return this.http.delete<Task>(this.api + '/' + id);
+      return this.http.delete(this.api + '/' + id);
     } else {
       console.error('deleteTask => id < 0');
     }

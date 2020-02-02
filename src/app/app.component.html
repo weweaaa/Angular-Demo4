@@ -1,6 +1,11 @@
 <section class="todoapp">
   <app-header (changeList)="addTodo($event)"></app-header>
-  <app-list (changeTaskStatus)="clickChangeTaskStatus($event)" [taskList]="taskList" [taskStatus]="taskStatus"></app-list>
+  <app-list
+    (deleteTaskID)="deleteTaskID($event)"
+    (changeTaskStatus)="clickChangeTaskStatus($event)"
+    [taskList]="taskList"
+    [taskStatus]="taskStatus"
+  ></app-list>
   <app-footer
     (clearComplete)="clearCompleteEvent($event)"
     (changeTaskStatus)="changeShowTaskStatus($event)"

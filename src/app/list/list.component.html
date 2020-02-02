@@ -2,6 +2,7 @@
   <ul class="todo-list">
     <li
       id="{{ task.id }}_li"
+      (dblclick)="editTask($event)"
       *ngFor="let task of showTaskList"
       [ngClass]="task.isDone ? 'completed' : ''"
     >
@@ -13,10 +14,20 @@
           class="toggle"
           type="checkbox"
         />
-        <label (dblclick)="editTask($event)">{{ task.title }}</label>
-        <button class="destroy"></button>
+        <label id="{{ task.id }}_LB">{{ task.title }}</label>
+        <button
+          id="{{ task.id }}_DEL_BT"
+          (click)="deleteTask($event)"
+          class="destroy"
+        ></button>
       </div>
-      <input class="edit" />
+      <input
+        id="{{ task.id }}_TB"
+        value="{{ task.title }}"
+        [hidden]="checkEdit(task.id)"
+        class="edit"
+        (keydown.enter)="editTaskEnd($event)"
+      />
     </li>
   </ul>
 </section>

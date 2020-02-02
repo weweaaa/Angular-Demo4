@@ -45,3 +45,8 @@
   - 我們實際要使用的 `import` 來源是 `@angular/core` 來源內的 `EventEmitter`
 - 在使用 `ng g s list` 時，如果不想同時建立目錄
   - 可加上 `--flat` 參數，如此就只會建立 `list.service.ts` 檔案
+
+---
+## 目前遇到的問題紀錄
+- 在 `core\list-service.ts` 當中還不知道如何實現外部傳入需要執行的事件流程
+- 如果短時間內進行更新 `Task` 及 `clear complete` 會造成 `json-server` 異常問題

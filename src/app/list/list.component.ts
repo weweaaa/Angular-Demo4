@@ -15,6 +15,8 @@ export class ListComponent implements OnInit {
   TaskList: Task[]; // 所有 Task 狀態的清單
   showTaskList: Task[]; // 依據目前清單選擇的狀態呈現的 Task 清單
 
+  editList: number[] = [];
+
   @Input('taskList') set setShowTaskList(taskList: Task[]) {
     this.TaskList = Object.assign(taskList);
     this.taskStatus = this.taskStatus === undefined ? TaskStatus.ALL : this.taskStatus;
@@ -26,6 +28,7 @@ export class ListComponent implements OnInit {
   }
 
   @Output() changeTaskStatus = new EventEmitter<any>();
+  @Output() deleteTaskID = new EventEmitter<number>();
 
   constructor(@Inject('todo') private listService: ListService) { }
 
@@ -37,8 +40,71 @@ export class ListComponent implements OnInit {
    * 編輯代辦清單資料
    */
   editTask(event: MouseEvent) {
-    const value = (event.target as HTMLLabelElement).innerText;
-    console.log('user edit', value);
+    const value = (event.target as HTMLLabelElement);
+    const changeId = value.id.replace('_LB', '');
+    const editLi = document.getElementById(changeId + '_li');
+
+    // 啟用編輯模式
+    if (editLi.classList.contains('completed') === false && editLi.classList.contains('editing') === false) {
+      editLi.classList.add('editing');
+      this.editList.push(+changeId);
+      console.log(this.editList);
+    } else if (editLi.classList.contains('completed') === true) {
+      alert('事項已完成，無法進行編輯');
+    }
+  }
+
+  /**
+   * 編輯結束
+   */
+  editTaskEnd(event: KeyboardEvent) {
+    const value = (event.target as HTMLInputElement);
+    const changeId = value.id.replace('_TB', '');
+    const editLi = document.getElementById(changeId + '_li');
+
+    this.changeTaskStatusEvent(this.TaskList.filter((todo) => {
+      if (todo.id === +changeId) {
+        todo.title = value.value;
+        return todo;
+      }
+    })[0]);
+
+    // 結束編輯模式
+    if (editLi.classList.contains('editing') === true) {
+      editLi.classList.remove('editing');
+      this.editList = this.editList.filter((val) => {
+        if (val !== +changeId) {
+          return val;
+        }
+      });
+      console.log(this.editList);
+    } else if (editLi.classList.contains('completed') === true) {
+      alert('事項已完成，無法進行編輯');
+    }
+  }
+
+  deleteTask(event: MouseEvent) {
+    const value = (event.target as HTMLButtonElement);
+    const changeId = value.id.replace('_DEL_BT', '');
+    const editLB = document.getElementById(changeId + '_LB');
+
+    if (confirm('Are you sure to delete => ' + editLB.innerText)) {
+      this.deleteTaskID.emit(+changeId);
+      console.log('Implement delete functionality here');
+    }
+  }
+
+  /**
+   * 判斷是否需要開啟編輯視窗
+   */
+  checkEdit(taskId: number): boolean {
+    this.editList.filter((id) => {
+      if (id === taskId) {
+        return true;
+      }
+    });
+
+    return false;
   }
 
   /**
